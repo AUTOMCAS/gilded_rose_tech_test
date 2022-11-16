@@ -115,4 +115,15 @@ describe("Shop", () => {
       expect(returnedItems[0].quality).toBe(0);
     });
   });
+
+  describe("reduceQuality()", () => {
+    test('reduces quality by 1', () => { 
+      const item = new Item("+5 Dexterity Vest", 10, 20);
+      const gildedRose = new Shop(item);
+      
+      gildedRose.reduceQuality(item)
+
+      expect(item.quality).toBe(19);
+     })
+   })
 });

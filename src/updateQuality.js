@@ -38,7 +38,7 @@ class Shop {
           if (item.name != "Backstage passes to a TAFKAL80ETC concert") {
             if (item.quality > 0) {
               if (item.name != "Sulfuras, Hand of Ragnaros") {
-                item.quality = item.quality - 1;
+                this.reduceQuality(item);;
               }
             }
           } else {
@@ -58,6 +58,7 @@ class Shop {
   reduceQuality(item) {
     item.quality = item.quality - 1;
   }
+  
 }
 
 module.exports = Shop;

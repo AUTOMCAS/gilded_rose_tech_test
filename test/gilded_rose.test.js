@@ -84,6 +84,14 @@ describe("Gilded Rose", () => {
 
         expect(returnedItems[0].quality).toBe(50);
       });
+
+      test("Sulfuras never decreases in quality", () => {
+        const items = [new Item("Sulfuras, Hand of Ragnaros", 0, 80)]
+        const gildedRose = new Shop(items);
+        const returnedItems = gildedRose.updateQuality();
+
+        expect(returnedItems[0].quality).toBe(80);
+      });
     });
   });
 });

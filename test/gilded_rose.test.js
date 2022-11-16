@@ -28,6 +28,14 @@ describe("Gilded Rose", () => {
 
         expect(returnedItems[0].quality).toBe(19)
       });
+
+      test("Item sell in is reduced by 1 for standard item", () => {
+        const items = [new Item("+5 Dexterity Vest", 10, 20)]
+        const gildedRose = new Shop(items);
+        const returnedItems = gildedRose.updateQuality();
+
+        expect(returnedItems[0].sellIn).toBe(9)
+      });
     });
   });
 });

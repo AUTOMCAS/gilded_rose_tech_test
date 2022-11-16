@@ -44,6 +44,14 @@ describe("Gilded Rose", () => {
 
         expect(returnedItems[0].quality).toBe(18)
       });
+
+      test("Item quality by is never negative for standard item", () => {
+        const items = [new Item("+5 Dexterity Vest", 0, 1)]
+        const gildedRose = new Shop(items);
+        const returnedItems = gildedRose.updateQuality();
+
+        expect(returnedItems[0].quality).toBe(0)
+      });
     });
   });
 });

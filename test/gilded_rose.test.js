@@ -1,7 +1,6 @@
 const { Shop, Item } = require("../src/gilded_rose");
 
 describe("Gilded Rose", () => {
-
   describe("Item", () => {
     test("item has correct properties", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
@@ -55,7 +54,7 @@ describe("Gilded Rose", () => {
       });
 
       test("Item quality by is never negative for any item", () => {
-        const items= [
+        const items = [
           new Item("+5 Dexterity Vest", 10, 0),
           new Item("Aged Brie", 2, 0),
           new Item("Sulfuras, Hand of Ragnaros", 0, 0),
@@ -64,13 +63,13 @@ describe("Gilded Rose", () => {
         const gildedRose = new Shop(items);
         const returnedItems = gildedRose.updateQuality();
 
-        result = returnedItems.forEach( (item) => {
-          expect(item.quality).toBeGreaterThanOrEqual(0)
-        })
+        result = returnedItems.forEach((item) => {
+          expect(item.quality).toBeGreaterThanOrEqual(0);
+        });
       });
 
       test("'Aged Brie' increases in quality over time", () => {
-        const items = [new Item("Aged Brie", 2, 0),];
+        const items = [new Item("Aged Brie", 2, 0)];
         const gildedRose = new Shop(items);
         const returnedItems = gildedRose.updateQuality();
 
@@ -78,7 +77,7 @@ describe("Gilded Rose", () => {
       });
 
       test("Quality of an item cannot be increased after 50", () => {
-        const items = [new Item("Aged Brie", 2, 50)]
+        const items = [new Item("Aged Brie", 2, 50)];
         const gildedRose = new Shop(items);
         const returnedItems = gildedRose.updateQuality();
 
@@ -86,7 +85,7 @@ describe("Gilded Rose", () => {
       });
 
       test("Sulfuras never decreases in quality", () => {
-        const items = [new Item("Sulfuras, Hand of Ragnaros", 0, 80)]
+        const items = [new Item("Sulfuras, Hand of Ragnaros", 0, 80)];
         const gildedRose = new Shop(items);
         const returnedItems = gildedRose.updateQuality();
 
@@ -94,7 +93,9 @@ describe("Gilded Rose", () => {
       });
 
       test("Backstage passes quality increases by 2 when sellIn is less than or equal to 10", () => {
-        const items = [new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10)]
+        const items = [
+          new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10),
+        ];
 
         const gildedRose = new Shop(items);
         const returnedItems = gildedRose.updateQuality();
@@ -103,7 +104,9 @@ describe("Gilded Rose", () => {
       });
 
       test("Backstage passes quality increases by 3 when sellIn is less than or equal to 5", () => {
-        const items = [new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10)]
+        const items = [
+          new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10),
+        ];
 
         const gildedRose = new Shop(items);
         const returnedItems = gildedRose.updateQuality();
@@ -111,7 +114,16 @@ describe("Gilded Rose", () => {
         expect(returnedItems[0].quality).toBe(13);
       });
 
-      
+      test("Backstage passes quality reduces to 0 when sell by has passed", () => {
+        const items = [
+          new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10),
+        ];
+
+        const gildedRose = new Shop(items);
+        const returnedItems = gildedRose.updateQuality();
+
+        expect(returnedItems[0].quality).toBe(0);
+      });
     });
   });
 });

@@ -176,6 +176,18 @@ describe("Shop", () => {
     });
   });
 
+  describe("decreaseSellIn()", () => {
+    test("decrease sellIn by 1", () => {
+      const item = new Item("+5 Dexterity Vest", 10, 20);
+      const gildedRose = new Shop(item);
+
+      gildedRose.decreaseSellIn(item);
+
+      expect(item.sellIn).toBe(9);
+    });
+  });
+
+
   describe("updateBackstagePass()", () => {
     test("reduces backstage pass sellIn by 1", () => {
       const item = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10);

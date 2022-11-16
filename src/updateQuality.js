@@ -62,6 +62,10 @@ class Shop {
     item.quality = item.quality + 1;
   }
 
+  decreaseSellIn(item) {
+    item.sellIn = item.sellIn - 1;
+  }
+
   updateSulfuras(item) {
     if (item.quality < 50) {
       this.increaseQuality(item);
@@ -71,12 +75,12 @@ class Shop {
   updateAgedBrie(item) {
     if (item.quality < 50) {
       this.increaseQuality(item);
-      item.sellIn = item.sellIn - 1;
+      this.decreaseSellIn(item);
     }
   }
 
   updateBackstagePass(item) {
-    item.sellIn = item.sellIn - 1;
+    this.decreaseSellIn(item);
   }
 }
 

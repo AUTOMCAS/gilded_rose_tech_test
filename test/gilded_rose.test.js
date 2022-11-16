@@ -76,6 +76,14 @@ describe("Gilded Rose", () => {
 
         expect(returnedItems[0].quality).toBe(1);
       });
+
+      test("Quality of an item cannot be over 50", () => {
+        const items = [new Item("Aged Brie", 2, 50)]
+        const gildedRose = new Shop(items);
+        const returnedItems = gildedRose.updateQuality();
+
+        expect(returnedItems[0].quality).toBe(50);
+      });
     });
   });
 });

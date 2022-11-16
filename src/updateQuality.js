@@ -74,6 +74,7 @@ class Shop {
 
   updateAgedBrie(item) {
     this.increaseQuality(item);
+    item.sellIn = item.sellIn - 1;
   }
 }
 

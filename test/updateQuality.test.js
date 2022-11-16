@@ -117,24 +117,43 @@ describe("Shop", () => {
   });
 
   describe("reduceQuality()", () => {
-    test('reduces quality by 1', () => { 
+    test("reduces quality by 1", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
       const gildedRose = new Shop(item);
-      
-      gildedRose.reduceQuality(item)
+
+      gildedRose.reduceQuality(item);
 
       expect(item.quality).toBe(19);
-     })
-   })
+    });
+  });
 
-   describe("increaseQuality()", () => {
-    test('increases quality by 1', () => { 
+  describe("increaseQuality()", () => {
+    test("increases quality by 1", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
       const gildedRose = new Shop(item);
-      
-      gildedRose.increaseQuality(item)
+
+      gildedRose.increaseQuality(item);
 
       expect(item.quality).toBe(21);
-     })
-   })
+    });
+  });
+
+  describe("updateSulfuras()", () => {
+    test("increases quality by 1 if quality is under 50", () => {
+      const item = new Item("Sulfuras, Hand of Ragnaros", 0, 49);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateSulfuras(item)
+
+      expect(item.quality).toBe(50);
+    });
+    test("does not increase quality if quality is over 50", () => {
+      const item = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateSulfuras(item)
+
+      expect(item.quality).toBe(80);
+    });
+  });
 });

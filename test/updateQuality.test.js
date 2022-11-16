@@ -156,4 +156,15 @@ describe("Shop", () => {
       expect(item.quality).toBe(80);
     });
   });
+
+  describe("updateAgedBrie()", () => {
+    test("increases quality by 1", () => {
+      const item = new Item("Aged Brie", 2, 0);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateAgedBrie(item)
+
+      expect(item.quality).toBe(1);
+    });
+  });
 });

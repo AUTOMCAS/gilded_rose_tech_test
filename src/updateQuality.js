@@ -71,6 +71,10 @@ class Shop {
       this.increaseQuality(item);
     }
   }
+
+  updateAgedBrie(item) {
+    this.increaseQuality(item);
+  }
 }
 
 module.exports = Shop;

@@ -68,6 +68,14 @@ describe("Gilded Rose", () => {
           expect(item.quality).toBeGreaterThanOrEqual(0)
         })
       });
+
+      test("'Aged Brie' increases in quality over time", () => {
+        const items = [new Item("Aged Brie", 2, 0),];
+        const gildedRose = new Shop(items);
+        const returnedItems = gildedRose.updateQuality();
+
+        expect(returnedItems[0].quality).toBe(1);
+      });
     });
   });
 });

@@ -74,6 +74,10 @@ class Shop {
       item.sellIn = item.sellIn - 1;
     }
   }
+
+  updateBackstagePass(item) {
+    item.sellIn = item.sellIn - 1;
+  }
 }
 
 module.exports = Shop;

@@ -158,7 +158,7 @@ describe("Shop", () => {
   });
 
   describe("updateAgedBrie()", () => {
-    test("increases quality by 1", () => {
+    test("increases Aged Brie quality by 1", () => {
       const item = new Item("Aged Brie", 2, 0);
       const gildedRose = new Shop(item);
 
@@ -166,7 +166,7 @@ describe("Shop", () => {
 
       expect(item.quality).toBe(1);
     });
-    test("reduces sellIn by 1", () => {
+    test("reduces Aged Brie sellIn by 1", () => {
       const item = new Item("Aged Brie", 2, 0);
       const gildedRose = new Shop(item);
 
@@ -175,4 +175,16 @@ describe("Shop", () => {
       expect(item.sellIn).toBe(1);
     });
   });
+
+  describe("updateBackstagePass()", () => {
+    test("reduces backstage pass sellIn by 1", () => {
+      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateBackstagePass(item);
+
+      expect(item.sellIn).toBe(4);
+    });
+  });
+
 });

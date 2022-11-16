@@ -80,6 +80,11 @@ class Shop {
   }
 
   updateBackstagePass(item) {
+    if (item.sellIn < 11) {
+      this.increaseQuality(item);
+      this.increaseQuality(item);
+    }
+
     this.decreaseSellIn(item);
   }
 }

@@ -143,7 +143,7 @@ describe("Shop", () => {
       const item = new Item("Sulfuras, Hand of Ragnaros", 0, 49);
       const gildedRose = new Shop(item);
 
-      gildedRose.updateSulfuras(item)
+      gildedRose.updateSulfuras(item);
 
       expect(item.quality).toBe(50);
     });
@@ -151,7 +151,7 @@ describe("Shop", () => {
       const item = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
       const gildedRose = new Shop(item);
 
-      gildedRose.updateSulfuras(item)
+      gildedRose.updateSulfuras(item);
 
       expect(item.quality).toBe(80);
     });
@@ -162,7 +162,7 @@ describe("Shop", () => {
       const item = new Item("Aged Brie", 2, 0);
       const gildedRose = new Shop(item);
 
-      gildedRose.updateAgedBrie(item)
+      gildedRose.updateAgedBrie(item);
 
       expect(item.quality).toBe(1);
     });
@@ -170,7 +170,7 @@ describe("Shop", () => {
       const item = new Item("Aged Brie", 2, 0);
       const gildedRose = new Shop(item);
 
-      gildedRose.updateAgedBrie(item)
+      gildedRose.updateAgedBrie(item);
 
       expect(item.sellIn).toBe(1);
     });
@@ -187,16 +187,23 @@ describe("Shop", () => {
     });
   });
 
-
   describe("updateBackstagePass()", () => {
     test("reduces backstage pass sellIn by 1", () => {
-      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10);
+      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5);
       const gildedRose = new Shop(item);
 
       gildedRose.updateBackstagePass(item);
 
       expect(item.sellIn).toBe(4);
     });
-  });
 
+    test("quality increases by 2 when sellIn is less than or equal to 10", () => {
+      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 5);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateBackstagePass(item);
+
+      expect(item.quality).toBe(7);
+    });
+  });
 });

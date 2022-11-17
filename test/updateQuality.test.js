@@ -35,14 +35,6 @@ describe("Shop", () => {
       expect(returnedItems[0].quality).toBe(18);
     });
 
-    test("Item quality by is never negative for standard item", () => {
-      const items = [new Item("+5 Dexterity Vest", 0, 1)];
-      const gildedRose = new Shop(items);
-      const returnedItems = gildedRose.updateQuality();
-
-      expect(returnedItems[0].quality).toBe(0);
-    });
-
     test("Item quality by is never negative for any item", () => {
       const items = [
         new Item("+5 Dexterity Vest", 10, 0),
@@ -58,14 +50,6 @@ describe("Shop", () => {
       });
     });
 
-    test("'Aged Brie' increases in quality over time", () => {
-      const items = [new Item("Aged Brie", 2, 0)];
-      const gildedRose = new Shop(items);
-      const returnedItems = gildedRose.updateQuality();
-
-      expect(returnedItems[0].quality).toBe(1);
-    });
-
     test("Quality of an item cannot be increased after 50", () => {
       const items = [new Item("Aged Brie", 2, 50)];
       const gildedRose = new Shop(items);
@@ -74,46 +58,6 @@ describe("Shop", () => {
       expect(returnedItems[0].quality).toBe(50);
     });
 
-    test("Sulfuras never decreases in quality", () => {
-      const items = [new Item("Sulfuras, Hand of Ragnaros", 0, 80)];
-      const gildedRose = new Shop(items);
-      const returnedItems = gildedRose.updateQuality();
-
-      expect(returnedItems[0].quality).toBe(80);
-    });
-
-    test("Backstage passes quality increases by 2 when sellIn is less than or equal to 10", () => {
-      const items = [
-        new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10),
-      ];
-
-      const gildedRose = new Shop(items);
-      const returnedItems = gildedRose.updateQuality();
-
-      expect(returnedItems[0].quality).toBe(12);
-    });
-
-    test("Backstage passes quality increases by 3 when sellIn is less than or equal to 5", () => {
-      const items = [
-        new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10),
-      ];
-
-      const gildedRose = new Shop(items);
-      const returnedItems = gildedRose.updateQuality();
-
-      expect(returnedItems[0].quality).toBe(13);
-    });
-
-    test("Backstage passes quality reduces to 0 when sell by has passed", () => {
-      const items = [
-        new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10),
-      ];
-
-      const gildedRose = new Shop(items);
-      const returnedItems = gildedRose.updateQuality();
-
-      expect(returnedItems[0].quality).toBe(0);
-    });
   });
 
   describe("reduceQuality()", () => {
@@ -168,6 +112,15 @@ describe("Shop", () => {
     });
     test("reduces Aged Brie sellIn by 1", () => {
       const item = new Item("Aged Brie", 2, 0);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateAgedBrie(item);
+
+      expect(item.sellIn).toBe(1);
+    });
+
+    test("reduces Aged Brie sellIn by 1 when quality is more than 50", () => {
+      const item = new Item("Aged Brie", 2, 50);
       const gildedRose = new Shop(item);
 
       gildedRose.updateAgedBrie(item);

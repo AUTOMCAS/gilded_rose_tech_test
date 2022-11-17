@@ -56,8 +56,8 @@ class Shop {
   updateAgedBrie(item) {
     if (item.quality < 50) {
       this.increaseQuality(item);
-      this.decreaseSellIn(item);
     }
+    this.decreaseSellIn(item);
   }
 
   updateBackstagePass(item) {

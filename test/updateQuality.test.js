@@ -132,7 +132,7 @@ describe("Shop", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
       const gildedRose = new Shop(item);
 
-      gildedRose.increaseQuality(item);
+      gildedRose.increaseQuality(item, 1);
 
       expect(item.quality).toBe(21);
     });

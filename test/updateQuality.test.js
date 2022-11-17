@@ -119,7 +119,7 @@ describe("Shop", () => {
       expect(item.sellIn).toBe(1);
     });
 
-    test("reduces Aged Brie sellIn by 1 when quality is more than 50", () => {
+    test("reduces Aged Brie sellIn by 1 when quality is more than or equal to 50", () => {
       const item = new Item("Aged Brie", 2, 50);
       const gildedRose = new Shop(item);
 
@@ -185,5 +185,17 @@ describe("Shop", () => {
 
       expect(item.quality).toBe(0);
     });
+  });
+
+  describe("updateStandardItem()", () => {
+    test("reduces standard item quality by 1", () => {
+      const item = new Item("+5 Dexterity Vest", 10, 20);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateStandardItem(item);
+
+      expect(item.quality).toBe(19);
+    });
+    
   });
 });

@@ -85,6 +85,10 @@ class Shop {
       this.increaseQuality(item);
     }
 
+    if (item.sellIn < 6) {
+      this.increaseQuality(item);
+    }
+
     this.decreaseSellIn(item);
   }
 }

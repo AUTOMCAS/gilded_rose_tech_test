@@ -19,39 +19,15 @@ class Shop {
         return;
       }
 
-      if (item.name != "Backstage passes to a TAFKAL80ETC concert") {
-        if (item.quality > 0) {
-          if (item.name != "Sulfuras, Hand of Ragnaros") {
-            this.reduceQuality(item);
-          }
-        }
-      } else {
-        if (item.quality < 50) {
-          this.increaseQuality(item);
-          if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-            if (item.sellIn < 11) {
-              if (item.quality < 50) {
-                this.increaseQuality(item);
-              }
-            }
-            if (item.sellIn < 6) {
-              if (item.quality < 50) {
-                this.increaseQuality(item);
-              }
-            }
-          }
-        }
+      if (item.quality > 0) {
+        this.reduceQuality(item);
       }
 
       item.sellIn = item.sellIn - 1;
 
       if (item.sellIn < 0) {
-        if (item.name != "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.quality > 0) {
-            this.reduceQuality(item);
-          }
-        } else {
-          item.quality = item.quality - item.quality;
+        if (item.quality > 0) {
+          this.reduceQuality(item);
         }
       }
     });
@@ -85,7 +61,6 @@ class Shop {
   }
 
   updateBackstagePass(item) {
-    
     this.increaseQuality(item);
     if (item.sellIn < 11) {
       this.increaseQuality(item);
@@ -98,7 +73,7 @@ class Shop {
     this.decreaseSellIn(item);
 
     if (item.sellIn < 0) {
-      item.quality = 0
+      item.quality = 0;
     }
   }
 }

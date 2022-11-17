@@ -223,5 +223,14 @@ describe("Shop", () => {
 
       expect(item.quality).toBe(9);
     });
+
+    test("quality reduces to 0 when sell in has passed ", () => {
+      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 6);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateBackstagePass(item);
+
+      expect(item.quality).toBe(0);
+    });
   });
 });

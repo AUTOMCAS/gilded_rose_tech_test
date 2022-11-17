@@ -214,6 +214,15 @@ describe("Shop", () => {
 
       expect(item.quality).toBe(8);
     });
+
+    test("sellIn is reduced by 1 each day", () => {
+      const item = new Item("+5 Dexterity Vest", 2, 10);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateStandardItem(item);
+
+      expect(item.sellIn).toBe(1);
+    });
     
   });
 });

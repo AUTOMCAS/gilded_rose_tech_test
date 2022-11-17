@@ -18,6 +18,7 @@ class Shop {
         this.updateBackstagePass(item);
         return;
       }
+      
 
       if (item.quality > 0) {
         this.reduceQuality(item);
@@ -61,6 +62,8 @@ class Shop {
     if (item.sellIn < 0) {
       this.reduceQuality(item);
     }
+
+    this.decreaseSellIn(item)
   }
 
   updateAgedBrie(item) {

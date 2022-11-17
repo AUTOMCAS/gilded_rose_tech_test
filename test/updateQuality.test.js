@@ -26,20 +26,6 @@ describe("Shop", () => {
       });
     });
 
-    test("Quality of an item cannot be increased after 50", () => {
-      const items = [
-        new Item("+5 Dexterity Vest", 10, 50),
-        new Item("Aged Brie", 2, 50),
-        new Item("Sulfuras, Hand of Ragnaros", 0, 50),
-        new Item("Backstage passes to a TAFKAL80ETC concert", 15, 50),
-      ];
-      const gildedRose = new Shop(items);
-      const returnedItems = gildedRose.updateQuality();
-
-      result = returnedItems.forEach((item) => {
-        expect(item.quality).toBeLessThanOrEqual(50);
-      });
-    });
   });
 
   describe("reduceQuality()", () => {
@@ -61,6 +47,15 @@ describe("Shop", () => {
       gildedRose.increaseQuality(item);
 
       expect(item.quality).toBe(21);
+    });
+
+    test("quality cannot be increased past 50", () => {
+      const item = new Item("+5 Dexterity Vest", 10, 50);
+      const gildedRose = new Shop(item);
+
+      gildedRose.increaseQuality(item);
+
+      expect(item.quality).toBe(50);
     });
   });
 

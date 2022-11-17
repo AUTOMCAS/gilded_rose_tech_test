@@ -29,7 +29,9 @@ class Shop {
   }
 
   increaseQuality(item) {
-    item.quality = item.quality + 1;
+    if (item.quality < 50) {
+      item.quality = item.quality + 1;
+    }
   }
 
   decreaseSellIn(item) {
@@ -37,9 +39,7 @@ class Shop {
   }
 
   updateSulfuras(item) {
-    if (item.quality < 50) {
-      this.increaseQuality(item);
-    }
+    this.increaseQuality(item);
   }
 
   updateStandardItem(item) {
@@ -55,22 +55,19 @@ class Shop {
   }
 
   updateAgedBrie(item) {
-    if (item.quality < 50) {
-      this.increaseQuality(item);
-    }
+    this.increaseQuality(item);
+
     this.decreaseSellIn(item);
   }
 
   updateBackstagePass(item) {
-    if (item.quality < 50) {
+    this.increaseQuality(item);
+    if (item.sellIn < 11) {
       this.increaseQuality(item);
-      if (item.sellIn < 11) {
-        this.increaseQuality(item);
-      }
+    }
 
-      if (item.sellIn < 6) {
-        this.increaseQuality(item);
-      }
+    if (item.sellIn < 6) {
+      this.increaseQuality(item);
     }
 
     this.decreaseSellIn(item);

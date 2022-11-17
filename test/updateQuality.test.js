@@ -196,6 +196,15 @@ describe("Shop", () => {
 
       expect(item.quality).toBe(19);
     });
+
+    test("Quality cannot become negative", () => {
+      const item = new Item("+5 Dexterity Vest", 10, 0);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateStandardItem(item);
+
+      expect(item.quality).toBe(0);
+    });
     
   });
 });

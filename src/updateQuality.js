@@ -52,8 +52,11 @@ class Shop {
       this.increaseQuality(item);
     }
   }
+
   updateStandardItem(item) {
+    if (item.quality > 0) {
     this.reduceQuality(item);
+    }
   }
 
   updateAgedBrie(item) {

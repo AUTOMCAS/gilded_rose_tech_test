@@ -18,19 +18,7 @@ class Shop {
         this.updateBackstagePass(item);
         return;
       }
-      
-
-      if (item.quality > 0) {
-        this.reduceQuality(item);
-      }
-
-      item.sellIn = item.sellIn - 1;
-
-      if (item.sellIn < 0) {
-        if (item.quality > 0) {
-          this.reduceQuality(item);
-        }
-      }
+      this.updateStandardItem(item);
     });
 
     return this.items;
@@ -59,11 +47,11 @@ class Shop {
       this.reduceQuality(item);
     }
 
+    this.decreaseSellIn(item);
+
     if (item.sellIn < 0) {
       this.reduceQuality(item);
     }
-
-    this.decreaseSellIn(item)
   }
 
   updateAgedBrie(item) {
@@ -74,13 +62,15 @@ class Shop {
   }
 
   updateBackstagePass(item) {
-    this.increaseQuality(item);
-    if (item.sellIn < 11) {
+    if (item.quality < 50) {
       this.increaseQuality(item);
-    }
+      if (item.sellIn < 11) {
+        this.increaseQuality(item);
+      }
 
-    if (item.sellIn < 6) {
-      this.increaseQuality(item);
+      if (item.sellIn < 6) {
+        this.increaseQuality(item);
+      }
     }
 
     this.decreaseSellIn(item);

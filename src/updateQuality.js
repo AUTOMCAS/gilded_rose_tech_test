@@ -55,7 +55,11 @@ class Shop {
 
   updateStandardItem(item) {
     if (item.quality > 0) {
-    this.reduceQuality(item);
+      this.reduceQuality(item);
+    }
+
+    if (item.sellIn < 0) {
+      this.reduceQuality(item);
     }
   }
 

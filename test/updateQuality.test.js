@@ -205,6 +205,15 @@ describe("Shop", () => {
 
       expect(item.quality).toBe(0);
     });
+
+    test("Quality degrades twice as fast when sellIn is less than 0", () => {
+      const item = new Item("+5 Dexterity Vest", -1, 10);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateStandardItem(item);
+
+      expect(item.quality).toBe(8);
+    });
     
   });
 });

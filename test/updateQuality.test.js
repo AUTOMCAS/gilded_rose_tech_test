@@ -132,7 +132,7 @@ describe("Shop", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
       const gildedRose = new Shop(item);
 
-      gildedRose.increaseQuality(item, 1);
+      gildedRose.increaseQuality(item);
 
       expect(item.quality).toBe(21);
     });
@@ -197,13 +197,22 @@ describe("Shop", () => {
       expect(item.sellIn).toBe(4);
     });
 
-    test("quality increases by 2 when sellIn is less than or equal to 10", () => {
-      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 5);
+    test("quality increases by 1 when sellIn is more than 10", () => {
+      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 12, 6);
       const gildedRose = new Shop(item);
 
       gildedRose.updateBackstagePass(item);
 
       expect(item.quality).toBe(7);
+    });
+
+    test("quality increases by 2 when sellIn is less than or equal to 10", () => {
+      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 6);
+      const gildedRose = new Shop(item);
+
+      gildedRose.updateBackstagePass(item);
+
+      expect(item.quality).toBe(8);
     });
   });
 });

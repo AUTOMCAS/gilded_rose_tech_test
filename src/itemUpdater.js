@@ -28,17 +28,16 @@ class itemUpdater{
   }
 
   conjuredItem(item) {
-    itemPropertyModifier.reduceQuality(item)
-    itemPropertyModifier.reduceQuality(item)
+    itemPropertyModifier.reduceQuality(item, 2)
   }
 
   standardItem(item) {
     if (item.quality > 0) {
-      itemPropertyModifier.reduceQuality(item);
+      itemPropertyModifier.reduceQuality(item, 1);
     }
 
     if (item.sellIn < 0) {
-      itemPropertyModifier.reduceQuality(item);
+      itemPropertyModifier.reduceQuality(item, 1);
     }
   }
 }

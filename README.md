@@ -88,7 +88,7 @@ node
 ```
 Copy and paste the below code to setup shop. Feel free to change the item properties.
 Item formate is: `name, sellIn, quality`
-```bash
+```sh
 const Shop = require("./src/shop");
 const Item = require("./src/item");
 
@@ -105,7 +105,7 @@ items.forEach((item) =>
   console.log(item) 
 );
 ```
-To simulate a day passing and the items updating paste:
+To simulate a day passing and the items updating:
 
 ```bash
 gildedRose.updateQuality();

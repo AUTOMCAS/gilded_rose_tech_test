@@ -22,7 +22,12 @@ describe("Shop", () => {
 
       const returnedItems = gildedRose.updateQuality();
 
-      const [returnedStandardItem, returnedAgedBrie, returnedBackstagePass, returnedSulfuras] = returnedItems;
+      const [
+        returnedStandardItem,
+        returnedAgedBrie,
+        returnedBackstagePass,
+        returnedSulfuras,
+      ] = returnedItems;
       expect(returnedStandardItem.quality).toBeGreaterThanOrEqual(0);
       expect(returnedAgedBrie.quality).toBeGreaterThanOrEqual(0);
       expect(returnedBackstagePass.quality).toBeGreaterThanOrEqual(0);
@@ -38,7 +43,8 @@ describe("Shop", () => {
       const gildedRose = new Shop(items);
 
       const returnedItems = gildedRose.updateQuality();
-      const [returnedStandardItem, returnedAgedBrie, returnedBackstagePass] = returnedItems;
+      const [returnedStandardItem, returnedAgedBrie, returnedBackstagePass] =
+        returnedItems;
       expect(returnedStandardItem.sellIn).toBe(1);
       expect(returnedAgedBrie.sellIn).toBe(1);
       expect(returnedBackstagePass.sellIn).toBe(1);
@@ -147,6 +153,13 @@ describe("Shop", () => {
       expect(returnedStandardItem.sellIn).toBe(9);
     });
 
+    test("Updates a Conjured item", () => {
+      const items = [new Item("Conjured Mana Cake", 3, 6)];
+      const gildedRose = new Shop(items);
+
+      const returnedConjuredItem = gildedRose.updateQuality()[0];
+
+      expect(returnedConjuredItem.quality).toBe(4);
+    });
   });
 });
-

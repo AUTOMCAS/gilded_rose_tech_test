@@ -17,6 +17,8 @@ class Shop {
         itemUpdater.agedBrie(item);
       } else if (item.name.includes("Backstage pass")) {
         itemUpdater.backstagePass(item);
+      } else if (item.name.includes("Conjured")) {
+        itemUpdater.conjuredItem(item);
       } else {
         itemUpdater.standardItem(item);
       }

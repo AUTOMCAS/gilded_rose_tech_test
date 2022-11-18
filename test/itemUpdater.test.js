@@ -58,6 +58,16 @@ describe("itemUpdater", () => {
     });
   });
 
+  describe("conjuredItem()", () => {
+    test("reduces standard item quality by 2", () => {
+      const item = new Item("Conjured Mana Cake", 3, 6);
+      
+      itemUpdater.conjuredItem(item);
+
+      expect(item.quality).toBe(4);
+    });
+  })
+
   describe("standardItem()", () => {
     test("reduces standard item quality by 1", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);

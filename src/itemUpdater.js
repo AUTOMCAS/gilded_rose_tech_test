@@ -27,6 +27,11 @@ class itemUpdater{
     }
   }
 
+  conjuredItem(item) {
+    itemPropertyModifier.reduceQuality(item)
+    itemPropertyModifier.reduceQuality(item)
+  }
+
   standardItem(item) {
     if (item.quality > 0) {
       itemPropertyModifier.reduceQuality(item);

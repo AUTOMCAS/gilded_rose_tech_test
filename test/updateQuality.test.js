@@ -141,15 +141,6 @@ describe("Shop", () => {
   });
 
   describe("updateBackstagePass()", () => {
-    test("reduces backstage pass sellIn by 1", () => {
-      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 5);
-      const gildedRose = new Shop(item);
-
-      gildedRose.updateBackstagePass(item);
-
-      expect(item.sellIn).toBe(4);
-    });
-
     test("quality increases by 1 when sellIn is more than 10", () => {
       const item = new Item("Backstage passes to a TAFKAL80ETC concert", 12, 6);
       const gildedRose = new Shop(item);
@@ -179,7 +170,7 @@ describe("Shop", () => {
 
     test("quality reduces to 0 when sell in has passed ", () => {
       const items = [
-        new Item("Backstage passes to a TAFKAL80ETC concert", 0, 6),
+        new Item("Backstage passes to a TAFKAL80ETC concert", -1, 6),
       ];
       const gildedRose = new Shop(items);
 

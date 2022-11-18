@@ -4,23 +4,23 @@ class Shop {
   }
   updateQuality() {
     this.items.forEach((item) => {
-      const expr = item.name;
-
-      switch (expr) {
+      switch (item.name) {
         case "Sulfuras, Hand of Ragnaros":
           this.updateSulfuras(item);
           break;
         case "Aged Brie":
           this.updateAgedBrie(item);
-          this.decreaseSellIn(item);
+
           break;
         case "Backstage passes to a TAFKAL80ETC concert":
           this.updateBackstagePass(item);
+
           break;
         default:
           this.updateStandardItem(item);
-          this.decreaseSellIn(item);
       }
+      if (item.name == "Sulfuras, Hand of Ragnaros") return;
+      this.decreaseSellIn(item);
     });
 
     return this.items;
@@ -59,6 +59,11 @@ class Shop {
   }
 
   updateBackstagePass(item) {
+    if (item.sellIn < 0) {
+      item.quality = 0;
+      return;
+    }
+
     this.increaseQuality(item);
     if (item.sellIn < 11) {
       this.increaseQuality(item);
@@ -66,12 +71,6 @@ class Shop {
 
     if (item.sellIn < 6) {
       this.increaseQuality(item);
-    }
-
-    this.decreaseSellIn(item);
-
-    if (item.sellIn < 0) {
-      item.quality = 0;
     }
   }
 }

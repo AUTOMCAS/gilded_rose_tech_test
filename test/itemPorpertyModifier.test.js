@@ -1,11 +1,12 @@
 const ItemPropertyModifier = require("../src/itemPropertyModifier");
 const Item = require("../src/item");
 
+const itemPropertyModifier = new ItemPropertyModifier()
+
 describe("ItemPropertyModifier", () => {
   describe("reduceQuality()", () => {
     test("reduces quality by 1", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
-      const itemPropertyModifier = new ItemPropertyModifier()
 
       const modifiedItem = itemPropertyModifier.reduceQuality(item);
 
@@ -16,7 +17,6 @@ describe("ItemPropertyModifier", () => {
   describe("increaseQuality()", () => {
     test("increases quality by 1", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
-      const itemPropertyModifier = new ItemPropertyModifier()
 
       const modifiedItem = itemPropertyModifier.increaseQuality(item);
 
@@ -25,7 +25,6 @@ describe("ItemPropertyModifier", () => {
 
     test("quality cannot be increased past 50", () => {
       const item = new Item("+5 Dexterity Vest", 10, 50);
-      const itemPropertyModifier = new ItemPropertyModifier()
 
       const modifiedItem = itemPropertyModifier.increaseQuality(item);
 
@@ -35,7 +34,6 @@ describe("ItemPropertyModifier", () => {
     describe("decreaseSellIn()", () => {
       test("decrease sellIn by 1", () => {
         const item = new Item("+5 Dexterity Vest", 10, 20);
-        const itemPropertyModifier = new ItemPropertyModifier()
 
         const modifiedItem = itemPropertyModifier.decreaseSellIn(item);
 

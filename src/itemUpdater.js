@@ -1,7 +1,7 @@
-const ItemPropertyModifier = require("../src/itemPropertyModifier");
+const ItemPropertyModifier = require("./itemPropertyModifier");
 const itemPropertyModifier = new ItemPropertyModifier()
 
-class updateItem{
+class itemUpdater{
   sulfuras(item) {
     itemPropertyModifier.increaseQuality(item);
   }
@@ -38,4 +38,4 @@ class updateItem{
   }
 }
 
-module.exports = updateItem
+module.exports = itemUpdater

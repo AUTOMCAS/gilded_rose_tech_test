@@ -1,8 +1,8 @@
-const ItemPropertyModifier = require("./itemPropertyModifier");
+const ItemModifier = require("./itemModifier");
 const ItemUpdater = require("./itemUpdater");
 
 const itemUpdater = new ItemUpdater();
-const itemPropertyModifier = new ItemPropertyModifier();
+const itemModifier = new ItemModifier();
 
 class Shop {
   constructor(items = []) {
@@ -23,7 +23,7 @@ class Shop {
         itemUpdater.standardItem(item);
       }
 
-      itemPropertyModifier.decreaseSellIn(item);
+      itemModifier.decreaseSellIn(item);
     });
 
     return this.items;

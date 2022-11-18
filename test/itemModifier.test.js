@@ -1,14 +1,14 @@
-const ItemPropertyModifier = require("../src/itemPropertyModifier");
+const ItemModifier = require("../src/itemModifier");
 const Item = require("../src/item");
 
-const itemPropertyModifier = new ItemPropertyModifier()
+const itemModifier = new ItemModifier()
 
-describe("ItemPropertyModifier", () => {
+describe("ItemModifier", () => {
   describe("reduceQuality()", () => {
     test("reduces quality by 1", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
 
-      itemPropertyModifier.reduceQuality(item, 1);
+      itemModifier.reduceQuality(item, 1);
 
       expect(item.quality).toBe(19);
     });
@@ -16,7 +16,7 @@ describe("ItemPropertyModifier", () => {
     test("reduces quality by 2", () => {
       const item = new Item("Conjured Mana Cake", 3, 6);
 
-      itemPropertyModifier.reduceQuality(item, 2);
+      itemModifier.reduceQuality(item, 2);
 
       expect(item.quality).toBe(4);
     });
@@ -26,7 +26,7 @@ describe("ItemPropertyModifier", () => {
     test("increases quality by 1", () => {
       const item = new Item("+5 Dexterity Vest", 10, 20);
 
-      itemPropertyModifier.increaseQuality(item);
+      itemModifier.increaseQuality(item);
 
       expect(item.quality).toBe(21);
     });
@@ -34,7 +34,7 @@ describe("ItemPropertyModifier", () => {
     test("quality cannot be increased past 50", () => {
       const item = new Item("+5 Dexterity Vest", 10, 50);
 
-      itemPropertyModifier.increaseQuality(item);
+      itemModifier.increaseQuality(item);
 
       expect(item.quality).toBe(50);
     });
@@ -43,7 +43,7 @@ describe("ItemPropertyModifier", () => {
       test("decrease sellIn by 1", () => {
         const item = new Item("+5 Dexterity Vest", 10, 20);
 
-        itemPropertyModifier.decreaseSellIn(item);
+        itemModifier.decreaseSellIn(item);
 
         expect(item.sellIn).toBe(9);
       });

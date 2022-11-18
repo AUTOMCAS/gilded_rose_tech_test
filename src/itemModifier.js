@@ -1,4 +1,4 @@
-class ItemPropertyModifier {
+class ItemModifier {
 
   reduceQuality(item, quantity) {
     item.quality = item.quality - quantity;
@@ -16,4 +16,4 @@ class ItemPropertyModifier {
 }
 
 
-module.exports = ItemPropertyModifier;
+module.exports = ItemModifier;

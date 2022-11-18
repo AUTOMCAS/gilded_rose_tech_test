@@ -1,13 +1,13 @@
-const ItemPropertyModifier = require("./itemPropertyModifier");
-const itemPropertyModifier = new ItemPropertyModifier()
+const ItemModifier = require("./itemModifier");
+const itemModifier = new ItemModifier()
 
 class itemUpdater{
   sulfuras(item) {
-    itemPropertyModifier.increaseQuality(item);
+    itemModifier.increaseQuality(item);
   }
 
   agedBrie(item) {
-    itemPropertyModifier.increaseQuality(item);
+    itemModifier.increaseQuality(item);
   }
 
   backstagePass(item) {
@@ -16,28 +16,28 @@ class itemUpdater{
       return;
     }
 
-    itemPropertyModifier.increaseQuality(item);
+    itemModifier.increaseQuality(item);
 
     if (item.sellIn < 11) {
-      itemPropertyModifier.increaseQuality(item);
+      itemModifier.increaseQuality(item);
     }
 
     if (item.sellIn < 6) {
-      itemPropertyModifier.increaseQuality(item);
+      itemModifier.increaseQuality(item);
     }
   }
 
   conjuredItem(item) {
-    itemPropertyModifier.reduceQuality(item, 2)
+    itemModifier.reduceQuality(item, 2)
   }
 
   standardItem(item) {
     if (item.quality > 0) {
-      itemPropertyModifier.reduceQuality(item, 1);
+      itemModifier.reduceQuality(item, 1);
     }
 
     if (item.sellIn < 0) {
-      itemPropertyModifier.reduceQuality(item, 1);
+      itemModifier.reduceQuality(item, 1);
     }
   }
 }

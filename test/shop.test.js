@@ -22,11 +22,11 @@ describe("Shop", () => {
 
       const returnedItems = gildedRose.updateQuality();
 
-      const [standardItem, agedBrie, backstagePass, sulfuras] = returnedItems;
-      expect(standardItem.quality).toBeGreaterThanOrEqual(0);
-      expect(agedBrie.quality).toBeGreaterThanOrEqual(0);
-      expect(backstagePass.quality).toBeGreaterThanOrEqual(0);
-      expect(sulfuras.quality).toBeGreaterThanOrEqual(0);
+      const [returnedStandardItem, returnedAgedBrie, returnedBackstagePass, returnedSulfuras] = returnedItems;
+      expect(returnedStandardItem.quality).toBeGreaterThanOrEqual(0);
+      expect(returnedAgedBrie.quality).toBeGreaterThanOrEqual(0);
+      expect(returnedBackstagePass.quality).toBeGreaterThanOrEqual(0);
+      expect(returnedSulfuras.quality).toBeGreaterThanOrEqual(0);
     });
 
     test("sellIn is reduced by 1 each day for all items apart from Sulfuras", () => {
@@ -38,10 +38,10 @@ describe("Shop", () => {
       const gildedRose = new Shop(items);
 
       const returnedItems = gildedRose.updateQuality();
-      const [standardItem, agedBrie, backstagePass] = returnedItems;
-      expect(standardItem.sellIn).toBe(1);
-      expect(agedBrie.sellIn).toBe(1);
-      expect(backstagePass.sellIn).toBe(1);
+      const [returnedStandardItem, returnedAgedBrie, returnedBackstagePass] = returnedItems;
+      expect(returnedStandardItem.sellIn).toBe(1);
+      expect(returnedAgedBrie.sellIn).toBe(1);
+      expect(returnedBackstagePass.sellIn).toBe(1);
     });
 
     test("sellIn is not reduced for Sulfuras", () => {
@@ -62,9 +62,9 @@ describe("Shop", () => {
       const items = [new Item("Sulfuras, Hand of Ragnaros", 0, 49)];
 
       const gildedRose = new Shop(items);
-      const sulfuras = gildedRose.updateQuality()[0];
+      const returnedSulfuras = gildedRose.updateQuality()[0];
 
-      expect(sulfuras.quality).toBe(50);
+      expect(returnedSulfuras.quality).toBe(50);
     });
 
     test("updates Aged Brie", () => {
@@ -80,8 +80,8 @@ describe("Shop", () => {
       const items = [new Item("Aged Brie", 2, 50)];
       const gildedRose = new Shop(items);
 
-      const agedBrie = gildedRose.updateQuality()[0];
-      expect(agedBrie.sellIn).toBe(1);
+      const returnedAgedBrie = gildedRose.updateQuality()[0];
+      expect(returnedAgedBrie.sellIn).toBe(1);
     });
 
     test("Updates backstage pass when sell by is more than 10", () => {
@@ -90,9 +90,9 @@ describe("Shop", () => {
       ];
       const gildedRose = new Shop(items);
 
-      const backstagePass = gildedRose.updateQuality()[0];
+      const returnedBackstagePass = gildedRose.updateQuality()[0];
 
-      expect(backstagePass.quality).toBe(7);
+      expect(returnedBackstagePass.quality).toBe(7);
     });
 
     test("Updates backstage pass when sell by is less than or equal to 10", () => {
@@ -101,9 +101,9 @@ describe("Shop", () => {
       ];
       const gildedRose = new Shop(items);
 
-      const backstagePass = gildedRose.updateQuality()[0];
+      const returnedBackstagePass = gildedRose.updateQuality()[0];
 
-      expect(backstagePass.quality).toBe(8);
+      expect(returnedBackstagePass.quality).toBe(8);
     });
 
     test("Updates backstage pass when sell by is less than or equal to  5", () => {
@@ -112,9 +112,9 @@ describe("Shop", () => {
       ];
       const gildedRose = new Shop(items);
 
-      const backstagePass = gildedRose.updateQuality()[0];
+      const returnedBackstagePass = gildedRose.updateQuality()[0];
 
-      expect(backstagePass.quality).toBe(9);
+      expect(returnedBackstagePass.quality).toBe(9);
     });
 
     test("Updates backstage pass when when sell by has passed ", () => {
@@ -123,30 +123,30 @@ describe("Shop", () => {
       ];
       const gildedRose = new Shop(items);
 
-      const backstagePass = gildedRose.updateQuality()[0];
+      const returnedBackstagePass = gildedRose.updateQuality()[0];
 
-      expect(backstagePass.quality).toBe(0);
+      expect(returnedBackstagePass.quality).toBe(0);
     });
 
     test("Updates backstage pass of a different type when sell by is more than 10", () => {
-      const items = [
-        new Item("Backstage passes to a Nyhm concert", 12, 6),
-      ];
+      const items = [new Item("Backstage passes to a Nyhm concert", 12, 6)];
       const gildedRose = new Shop(items);
 
-      const backstagePass = gildedRose.updateQuality()[0];
+      const returnedBackstagePass = gildedRose.updateQuality()[0];
 
-      expect(backstagePass.quality).toBe(7);
+      expect(returnedBackstagePass.quality).toBe(7);
     });
 
     test("Updates a standard item", () => {
       const items = [new Item("+5 Dexterity Vest", 10, 20)];
       const gildedRose = new Shop(items);
 
-      const standardItem = gildedRose.updateQuality()[0];
+      const returnedStandardItem = gildedRose.updateQuality()[0];
 
-      expect(standardItem.quality).toBe(19);
-      expect(standardItem.sellIn).toBe(9);
+      expect(returnedStandardItem.quality).toBe(19);
+      expect(returnedStandardItem.sellIn).toBe(9);
     });
+
   });
 });
+

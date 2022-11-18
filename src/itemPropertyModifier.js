@@ -1,7 +1,7 @@
 class ItemPropertyModifier {
 
-  reduceQuality(item) {
-    item.quality = item.quality - 1;
+  reduceQuality(item, quantity) {
+    item.quality = item.quality - quantity;
     return item
   }
 

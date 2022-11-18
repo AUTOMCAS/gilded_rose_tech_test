@@ -51,19 +51,20 @@ describe("Shop", () => {
       ];
       const gildedRose = new Shop(items);
 
-      const returnedItems = gildedRose.updateQuality();
+      const returnedSulfuras1 = gildedRose.updateQuality()[0];
+      const returnedSulfuras2 = gildedRose.updateQuality()[1];
 
-      expect(returnedItems[0].sellIn).toBe(0);
-      expect(returnedItems[1].sellIn).toBe(-1);
+      expect(returnedSulfuras1.sellIn).toBe(0);
+      expect(returnedSulfuras2.sellIn).toBe(-1);
     });
 
-    test("increases Sulfuras quality by 1 if quality is under 50", () => {
+    test("Updates Sulfuras when quality is below 50", () => {
       const items = [new Item("Sulfuras, Hand of Ragnaros", 0, 49)];
 
       const gildedRose = new Shop(items);
-      const returnedItems = gildedRose.updateQuality();
+      const sulfuras = gildedRose.updateQuality()[0];
 
-      expect(returnedItems[0].quality).toBe(50);
+      expect(sulfuras.quality).toBe(50);
     });
 
     test("updates Aged Brie", () => {
@@ -115,6 +116,7 @@ describe("Shop", () => {
 
       expect(backstagePass.quality).toBe(9);
     });
+
     test("Updates backstage pass when when sell by has passed ", () => {
       const items = [
         new Item("Backstage passes to a TAFKAL80ETC concert", -1, 6),
@@ -125,36 +127,26 @@ describe("Shop", () => {
 
       expect(backstagePass.quality).toBe(0);
     });
+
+    test("Updates backstage pass of a different type when sell by is more than 10", () => {
+      const items = [
+        new Item("Backstage passes to a Nyhm concert", 12, 6),
+      ];
+      const gildedRose = new Shop(items);
+
+      const backstagePass = gildedRose.updateQuality()[0];
+
+      expect(backstagePass.quality).toBe(7);
+    });
+
+    test("Updates a standard item", () => {
+      const items = [new Item("+5 Dexterity Vest", 10, 20)];
+      const gildedRose = new Shop(items);
+
+      const standardItem = gildedRose.updateQuality()[0];
+
+      expect(standardItem.quality).toBe(19);
+      expect(standardItem.sellIn).toBe(9);
+    });
   });
-
-
-
-  //   describe("updateStandardItem()", () => {
-  //     test("reduces standard item quality by 1", () => {
-  //       const item = new Item("+5 Dexterity Vest", 10, 20);
-  //       const gildedRose = new Shop(item);
-
-  //       gildedRose.updateStandardItem(item);
-
-  //       expect(item.quality).toBe(19);
-  //     });
-
-  //     test("Quality cannot become negative", () => {
-  //       const item = new Item("+5 Dexterity Vest", 10, 0);
-  //       const gildedRose = new Shop(item);
-
-  //       gildedRose.updateStandardItem(item);
-
-  //       expect(item.quality).toBe(0);
-  //     });
-
-  //     test("Quality degrades twice as fast when sellIn is less than 0", () => {
-  //       const item = new Item("+5 Dexterity Vest", -1, 10);
-  //       const gildedRose = new Shop(item);
-
-  //       gildedRose.updateStandardItem(item);
-
-  //       expect(item.quality).toBe(8);
-  //     });
-  //   });
 });

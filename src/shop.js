@@ -1,8 +1,8 @@
 const ItemPropertyModifier = require("./itemPropertyModifier");
 const ItemUpdater = require("./itemUpdater");
 
-const itemUpdater = new ItemUpdater
-const itemPropertyModifier = new ItemPropertyModifier()
+const itemUpdater = new ItemUpdater();
+const itemPropertyModifier = new ItemPropertyModifier();
 
 class Shop {
   constructor(items = []) {
@@ -10,26 +10,22 @@ class Shop {
   }
   updateQuality() {
     this.items.forEach((item) => {
-      switch (item.name) {
-        case "Sulfuras, Hand of Ragnaros":
-          itemUpdater.sulfuras(item);
-          break;
-        case "Aged Brie":
-          itemUpdater.agedBrie(item);
-          break;
-        case "Backstage passes to a TAFKAL80ETC concert":
-          itemUpdater.backstagePass(item);
-          break;
-        default:
-          itemUpdater.standardItem(item);
+      if (item.name == "Sulfuras, Hand of Ragnaros") {
+        itemUpdater.sulfuras(item);
+        return;
+      } else if (item.name == "Aged Brie") {
+        itemUpdater.agedBrie(item);
+      } else if (item.name.includes("Backstage pass")) {
+        itemUpdater.backstagePass(item);
+      } else {
+        itemUpdater.standardItem(item);
       }
-      if (item.name == "Sulfuras, Hand of Ragnaros") return;
+
       itemPropertyModifier.decreaseSellIn(item);
     });
 
     return this.items;
   }
-
 }
 
 module.exports = Shop;

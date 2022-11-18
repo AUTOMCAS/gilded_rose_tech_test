@@ -23,6 +23,7 @@ describe("itemUpdater", () => {
       expect(item.quality).toBe(1);
     });
   });
+  
   describe("backstagePass()", () => {
     test("quality increases by 1 when sellIn is more than 10", () => {
       const item = new Item("Backstage passes to a TAFKAL80ETC concert", 12, 6);

@@ -65,6 +65,7 @@ class Shop {
     }
 
     this.increaseQuality(item);
+
     if (item.sellIn < 11) {
       this.increaseQuality(item);
     }

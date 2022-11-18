@@ -11,39 +11,37 @@ describe("Shop", () => {
       expect(returnedItems[0].name).toBe("+5 Dexterity Vest");
     });
 
-    test("Item quality by is never negative for any item", () => {
+    test("Item quality by is never negative for any item type", () => {
       const items = [
         new Item("+5 Dexterity Vest", 10, 0),
         new Item("Aged Brie", 2, 0),
-        new Item("Sulfuras, Hand of Ragnaros", 0, 0),
         new Item("Backstage passes to a TAFKAL80ETC concert", 15, 0),
+        new Item("Sulfuras, Hand of Ragnaros", 0, 0)
       ];
       const gildedRose = new Shop(items);
+
       const returnedItems = gildedRose.updateQuality();
 
-      result = returnedItems.forEach((item) => {
-        expect(item.quality).toBeGreaterThanOrEqual(0);
-      });
+      const [standardItem, agedBrie, backstagePass, sulfuras] = returnedItems;
+      expect(standardItem.quality).toBeGreaterThanOrEqual(0);
+      expect(agedBrie.quality).toBeGreaterThanOrEqual(0);
+      expect(backstagePass.quality).toBeGreaterThanOrEqual(0);
+      expect(sulfuras.quality).toBeGreaterThanOrEqual(0);
     });
 
     test("sellIn is reduced by 1 each day for all items apart from Sulfuras", () => {
       const items = [
         new Item("+5 Dexterity Vest", 2, 20),
         new Item("Aged Brie", 2, 0),
-        new Item("Elixir of the Mongoose", 2, 7),
         new Item("Backstage passes to a TAFKAL80ETC concert", 2, 20),
-        new Item("Backstage passes to a TAFKAL80ETC concert", 2, 49),
-        new Item("Backstage passes to a TAFKAL80ETC concert", 2, 49),
       ];
       const gildedRose = new Shop(items);
 
       const returnedItems = gildedRose.updateQuality();
-      expect(returnedItems[0].sellIn).toBe(1);
-      expect(returnedItems[1].sellIn).toBe(1);
-      expect(returnedItems[2].sellIn).toBe(1);
-      expect(returnedItems[3].sellIn).toBe(1);
-      expect(returnedItems[4].sellIn).toBe(1);
-      expect(returnedItems[5].sellIn).toBe(1);
+      const [standardItem, agedBrie, backstagePass] = returnedItems;
+      expect(standardItem.sellIn).toBe(1);
+      expect(agedBrie.sellIn).toBe(1);
+      expect(backstagePass.sellIn).toBe(1);
     });
 
     test("reduces Aged Brie sellIn by 1 when quality is more than or equal to 50", () => {
@@ -107,14 +105,6 @@ describe("Shop", () => {
       gildedRose.updateSulfuras(item);
 
       expect(item.quality).toBe(50);
-    });
-    test("does not increase quality if quality is over 50", () => {
-      const item = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
-      const gildedRose = new Shop(item);
-
-      gildedRose.updateSulfuras(item);
-
-      expect(item.quality).toBe(80);
     });
   });
 

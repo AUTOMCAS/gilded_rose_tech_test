@@ -26,6 +26,46 @@ describe("Shop", () => {
       });
     });
 
+    test("sellIn is reduced by 1 each day for all items apart from Sulfuras", () => {
+      const items = [
+        new Item("+5 Dexterity Vest", 2, 20),
+        new Item("Aged Brie", 2, 0),
+        new Item("Elixir of the Mongoose", 2, 7),
+        new Item("Backstage passes to a TAFKAL80ETC concert", 2, 20),
+        new Item("Backstage passes to a TAFKAL80ETC concert", 2, 49),
+        new Item("Backstage passes to a TAFKAL80ETC concert", 2, 49),
+      ];
+      const gildedRose = new Shop(items);
+
+      const returnedItems = gildedRose.updateQuality();
+      expect(returnedItems[0].sellIn).toBe(1);
+      expect(returnedItems[1].sellIn).toBe(1);
+      expect(returnedItems[2].sellIn).toBe(1);
+      expect(returnedItems[3].sellIn).toBe(1);
+      expect(returnedItems[4].sellIn).toBe(1);
+      expect(returnedItems[5].sellIn).toBe(1);
+    });
+
+    test("reduces Aged Brie sellIn by 1 when quality is more than or equal to 50", () => {
+      const items = [new Item("Aged Brie", 2, 50)];
+      const gildedRose = new Shop(items);
+
+      const returnedItems = gildedRose.updateQuality();
+      expect(returnedItems[0].sellIn).toBe(1);
+    });
+
+    test("sellIn is not reduced for Sulfuras", () => {
+      const items = [
+        new Item("Sulfuras, Hand of Ragnaros", 0, 80),
+        new Item("Sulfuras, Hand of Ragnaros", -1, 80),
+      ];
+      const gildedRose = new Shop(items);
+
+      const returnedItems = gildedRose.updateQuality();
+
+      expect(returnedItems[0].sellIn).toBe(0);
+      expect(returnedItems[1].sellIn).toBe(-1);
+    });
   });
 
   describe("reduceQuality()", () => {
@@ -87,23 +127,6 @@ describe("Shop", () => {
 
       expect(item.quality).toBe(1);
     });
-    test("reduces Aged Brie sellIn by 1", () => {
-      const item = new Item("Aged Brie", 2, 0);
-      const gildedRose = new Shop(item);
-
-      gildedRose.updateAgedBrie(item);
-
-      expect(item.sellIn).toBe(1);
-    });
-
-    test("reduces Aged Brie sellIn by 1 when quality is more than or equal to 50", () => {
-      const item = new Item("Aged Brie", 2, 50);
-      const gildedRose = new Shop(item);
-
-      gildedRose.updateAgedBrie(item);
-
-      expect(item.sellIn).toBe(1);
-    });
   });
 
   describe("decreaseSellIn()", () => {
@@ -155,12 +178,14 @@ describe("Shop", () => {
     });
 
     test("quality reduces to 0 when sell in has passed ", () => {
-      const item = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 6);
-      const gildedRose = new Shop(item);
+      const items = [
+        new Item("Backstage passes to a TAFKAL80ETC concert", 0, 6),
+      ];
+      const gildedRose = new Shop(items);
 
-      gildedRose.updateBackstagePass(item);
+      const returnedItems = gildedRose.updateQuality();
 
-      expect(item.quality).toBe(0);
+      expect(returnedItems[0].quality).toBe(0);
     });
   });
 
@@ -190,15 +215,6 @@ describe("Shop", () => {
       gildedRose.updateStandardItem(item);
 
       expect(item.quality).toBe(8);
-    });
-
-    test("sellIn is reduced by 1 each day", () => {
-      const item = new Item("+5 Dexterity Vest", 2, 10);
-      const gildedRose = new Shop(item);
-
-      gildedRose.updateStandardItem(item);
-
-      expect(item.sellIn).toBe(1);
     });
   });
 });
